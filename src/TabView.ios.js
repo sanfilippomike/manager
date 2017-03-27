@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { switchTab, switchVisibility } from './actions';
+import { tabChanged, visibilityChanged } from './actions';
 
 class TabView extends Component {
 
@@ -19,9 +19,16 @@ class TabView extends Component {
 	  presses: 0,
 	};
 
+	props: {
+	  tab: Tab;
+	  day: Day;
+	  onTabSelect: (tab: Tab) => void;
+	};
+
+
 	onTabSelect(tab) {
 		if (this.props.tab !== tab) {
-			this.props.switchTab(tab);
+			this.props.tabChanged(tab);
 		}
 	}
 
@@ -45,11 +52,11 @@ class TabView extends Component {
 			>
 
 			<TabBarIOS.Item
-				  title="Info"
-				  selected={this.props.tab === 'info'}
-				  onPress={this.onTabSelect.bind(this)}
-				  icon={require('./tabs/info/img/info-icon.png')}
-				  selectedIcon={require('./tabs/info/img/info-icon-active.png')}
+				  title="Home"
+				  selected={this.props.tab === 'home'}
+				  onPress={this.onTabSelect.bind(this, 'home') }
+				  icon={require('./tabs/home/img/icon-home.png')}
+				  selectedIcon={require('./tabs/home/img/icon-home-active.png')}
 			  >
 			  {this._renderContent('#414A8C', 'Blue Tab')}
 
@@ -57,13 +64,13 @@ class TabView extends Component {
 
 
 			<TabBarIOS.Item
-				title="Home"
-				icon={require('./tabs/home/img/icon-home.png')}
-				selectedIcon={require('./tabs/home/img/icon-home-active.png')}
-				selected={this.state.selectedTab === 'Home'}
-				onPress={this.onTabSelect.bind(this)} 
+				title="My Profile"
+				icon={require('./tabs/profile/img/icon-profile.png')}
+				selectedIcon={require('./tabs/profile/img/icon-profile-active.png')}
+				selected={this.state.selectedTab === 'myprofile'}
+				onPress={this.onTabSelect.bind(this, 'myprofile')}
 			>
-			{this._renderContent('#414A8C', 'Blue Tab')}
+			{this._renderContent('#21551C', 'Green Tab', this.state.presses)}
 			</TabBarIOS.Item>
 
 
@@ -72,7 +79,7 @@ class TabView extends Component {
 				selected={this.props.tab === 'map'}
 				icon={require('./tabs/sendthanks/img/icon-airplane.png')}
 				selectedIcon={require('./tabs/sendthanks/img/icon-airplane-active.png')}
-				onPress={this.onTabSelect.bind(this)} 
+				onPress={this.onTabSelect.bind(this, 'home')}
 			>
 			<View />
 			</TabBarIOS.Item>
@@ -111,35 +118,7 @@ class TabView extends Component {
 
 
 
-			<Icon.TabBarItem
-				title="Send Thanks"
-				iconName="paper-plane"
-				selectedIconName="paper-plane"
-				selected={this.state.selectedTab === 'sendthanks'}
-				onPress={() => {
-					this.setState({
-						selectedTab: 'sendthanks',
-					});
-				}}
-			>
 
-			<View style={styles.tabContent}><Text>Home Tab</Text></View>
-			</Icon.TabBarItem>
-
-
-			<TabBarIOS.Item
-				title="Reports"
-				icon={require('./tabs/reports/img/icon-report.png')}
-				selectedIcon={require('./tabs/reports/img/icon-report-active.png')}
-				selected={this.state.selectedTab === 'Reports'}
-				onPress={() => {
-					this.setState({
-						selectedTab: 'reports',
-					});
-				}}
-			>
-			{this._renderContent('#414A8C', 'Blue Tab')}
-			</TabBarIOS.Item>
 
 			</TabBarIOS>
 		);
@@ -169,5 +148,5 @@ const mapStateToProps = ({ navigation }) => {
 };
 
 
-export default connect(mapStateToProps, { switchTab, switchVisibility })(TabView);
+export default connect(mapStateToProps, { tabChanged, visibilityChanged })(TabView);
 

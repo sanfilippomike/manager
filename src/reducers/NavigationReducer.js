@@ -1,6 +1,6 @@
 import {
-  SWITCH_TAB,
-  SWITCH_VISIBILITY,
+  VISIBILITY_CHANGED,
+  TAB_CHANGED,
   LOGGED_OUT
 } from '../actions/types';
 
@@ -21,10 +21,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SWITCH_TAB:
+    case TAB_CHANGED:
+      console.log(action.tab);
     // action.payload === { props: 'name', value: 'jane' }
       return { ...state, tab: action.tab };  
-    case SWITCH_VISIBILITY:
+    case VISIBILITY_CHANGED:
       return { ...state, visbility: action.visbility };
     case LOGGED_OUT:
       return INITIAL_STATE;

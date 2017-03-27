@@ -1,17 +1,15 @@
-import { SWITCH_TAB, SWITCH_VISIBILITY } from './types';
+import { TAB_CHANGED, VISIBILITY_CHANGED } from './types';
 
-type Tab = 'home' | 'myprofile' | 'sendthanks' | 'reports' | 'info';
-
-export const switchTab = (tab: Tab) => {
+export const tabChanged = (tab) => {
 	return {
-		type: SWITCH_TAB,
-		tab,
+		type: TAB_CHANGED,
+		tab
 	};
 };
 
-export const switchVisibility = (visibility: 'me' | 'myTeam' | 'global') => {
+export const visibilityChanegd = (visibility) => {
 	return {
-		type: SWITCH_VISIBILITY,
-		visibility,
+		type: VISIBILITY_CHANGED,
+		visibility
 	};
 };

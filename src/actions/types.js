@@ -7,8 +7,8 @@ export const EMPLOYEE_UPDATE = 'employee_update';
 export const EMPLOYEE_CREATE = 'employee_create';
 export const EMPLOYEES_FETCH_SUCCESS = 'employee_fetch_success';
 export const EMPLOYEE_SAVE_SUCESS = 'employee_save_success';
-export const SWITCH_VISBILITY = 'switch_visibility';
-export const SWITCH_TAB = 'switch_tab';
+export const VISIBILITY_CHANGED = 'visibility_changed';
+export const TAB_CHANGED = 'tab_changed';
 export const LOGGED_OUT = 'logged_out';
 
 //export type Action = 
